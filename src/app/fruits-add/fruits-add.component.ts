@@ -17,7 +17,7 @@ export class FruitsAddComponent implements OnInit {
   public fruits: Fruit [] = [
     new Fruit('Sandia', "1"),
     new Fruit('Melon', "2"),
-    new Fruit('Tomate', "3"),
+    new Fruit('Kiwi', "3"),
     new Fruit('Banana', "4"),
     new Fruit('Manzana', "5"),
   ];
@@ -33,6 +33,8 @@ export class FruitsAddComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this._peticionesService.getPrueba());
+    console.log(this.fruits);
+    console.log(this.petFrutas);
     this._peticionesService.getFrutas().subscribe(
       result => {
         this.petFrutas = result;
@@ -48,13 +50,8 @@ export class FruitsAddComponent implements OnInit {
 
   onToggleAddUpdate(){
     this.fruits.push(this.fruit)
-    this.fruit = new Fruit("","");
-  }
-
-  onRemoveFruit(id: number){
-    const pos = id;
-    this.fruits.splice(pos, 1);
-    // this._peticionesService.deleteFruta(pos).subscribe(
+    // this._peticionesService.createFruit(this.fruit)
+    //   .subscribe(
     //   result => {
     //     this.petFrutas = result;
     //     console.log(result);
@@ -63,7 +60,20 @@ export class FruitsAddComponent implements OnInit {
     //     var errorMessage = <any>error;
     //     console.log(errorMessage)
     //   }
-    // );
+    // );;
+    this.fruit = new Fruit("","");
+  }
+
+  onRemoveFruit(id: number){
+    const pos = id;
+    this.fruits.splice(pos, 1);
+    // this._peticionesService.deleteFruta(this.petFrutas)
+  }
+
+  onRemoveFruitDB(id: number){
+    this._peticionesService.deleteFruta(id);
+    this.petFrutas.splice(id, 1)
+    console.log(this.petFrutas)
   }
 
   existFruit(name: string){

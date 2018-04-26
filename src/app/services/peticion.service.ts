@@ -4,6 +4,12 @@ import {Injectable} from "@angular/core";
 import  {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import { HttpModule } from '@angular/http';
+import {Fruit} from "../fruits-add/fruit-add.model";
+import {HttpHeaders} from "@angular/common/http";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class PeticionService{
@@ -20,8 +26,12 @@ export class PeticionService{
   }
 
   deleteFruta(i: number){
-      return this._http.delete(this.url+"/"+i);
+      return this._http.delete(this.url+"/"+i)
   }
+
+  // createFruit(fruit: Fruit) {
+  //     return this._http.post(this.url, fruit, httpOptions)
+  // }
 
   // getPrueba(){
   //   return 'Hola mundo';

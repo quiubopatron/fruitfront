@@ -14,9 +14,9 @@
       </a>
 <!--frutas desde la petición-->
       <a class="list-group-item"
-         *ngFor = "let petFruta of petFrutas; let i = index">
+         *ngFor = "let petFruta of petFrutas; let j = index">
         {{petFruta.name}} ({{petFruta.pricePerKg}})
-        <button (click)="onRemoveFruit(i)" style="float: right">
+        <button (click)="onRemoveFruitDB(j)" style="float: right">
           Delete
         </button>
       </a>
