@@ -1,0 +1,77 @@
+<h4>Fruits</h4>
+
+<div class="row">
+  <div class="col-xs-10">
+    <ul class="list-group">
+      <a class="list-group-item"
+         *ngFor="let fruit of fruits;
+          let i = index"
+         >
+        {{fruit.name}} ({{fruit.pricePerKg}})
+          <button (click)="onRemoveFruit(i)" style="float: right">
+            Delete
+          </button>
+      </a>
+<!--frutas desde la petición-->
+      <a class="list-group-item"
+         *ngFor = "let petFruta of petFrutas; let i = index">
+        {{petFruta.name}} ({{petFruta.pricePerKg}})
+        <button (click)="onRemoveFruit(i)" style="float: right">
+          Delete
+        </button>
+      </a>
+
+    </ul>
+  </div>
+</div>
+
+<!--<div class="alert alert-info">-->
+  <!--<strong>Info! </strong>-->
+  <!--<br>Pincha sobre una fruta para eliminarla de la lista-->
+<!--</div>-->
+
+<hr>
+
+<!--<form method="post">-->
+<form #formFruta="ngForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <h4 defColOnEvent>Add or update Fruit</h4>
+    <p>
+      <label> <b> Name </b> </label>
+      <input type = "text"
+             class="form-control"
+             name="name"
+             #name="ngModel"
+             [(ngModel)]="fruit.name"
+             pattern="[a-zA-Z]+"
+             required/>
+    </p>
+    <p>
+      <label> <b> Price per Kg </b> </label>
+      <input type = "number"
+             class="form-control"
+             name="pricePerKg"
+             #pricePerKg="ngModel"
+             [(ngModel)]="fruit.pricePerKg"
+             pattern="[0-9]+"
+             required>
+    </p>
+
+    <p>
+      <button class="btn btn-primary"
+              type = "submit"
+              [disabled]="fruit.name=='' || fruit.pricePerKg==''"
+              (click)="existFruit(fruit.name)" >
+        Add/Update
+      </button>
+    </p>
+  </div>
+  <div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong>
+    <br>Las frutas se actualizarán introduciendo el mismo nombre de fruta y diferente precio.
+    <br>En caso contrario se creará una nueva fruta.
+  </div>
+
+</form>
+<!--</form>-->
+
