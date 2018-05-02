@@ -81,14 +81,11 @@
 </div>
 <form>
   <div class="container">
-    <h4 defColOnEvent>Add or update Fruit</h4>
+    <h4 defColOnEvent>Add Fruit</h4>
     <p>
       <label> <b> Name </b> </label>
       <input type = "text"
              class="form-control"
-             name="name"
-             #name="ngModel"
-             [(ngModel)]="fruit.name"
              pattern="[a-zA-Z]+"
              required/>
     </p>
@@ -102,8 +99,8 @@
 
     <p>
       <button class="btn btn-primary"
-              type = "submit">
-              <!--(click)="#"-->
+              type = "submit"
+              (click)="onCreateFruitDB()">
         Add
       </button>
     </p>

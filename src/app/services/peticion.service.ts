@@ -1,39 +1,28 @@
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
-import  {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
-import { HttpModule } from '@angular/http';
 import {Fruit} from "../fruits-add/fruit-add.model";
-import {HttpHeaders} from "@angular/common/http";
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class PeticionService{
   // public url: string;
   public url = "http://localhost:8081/rookie/fruits";
-  private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private _http: Http){
-      this.headers.append('Access-Control-Allow-Origin', '*');
+    constructor(private _http: HttpClient){
     }
 
-  getFrutas(){
-    return this._http.get(this.url).map(res => res.json());
+  getFruits(){
+    return this._http.get<Fruit[]>(this.url);
   }
 
-  deleteFruta(i: number){
-      return this._http.delete(this.url+"/"+i)
+  deleteFruit(i: number){
+      console.log("DELETE");
+      return this._http.delete(this.url+"/"+i);
   }
 
-  // createFruit(fruit: Fruit) {
-  //     return this._http.post(this.url, fruit, httpOptions)
-  // }
+  createFruit(fruit: Fruit) {
+      return this._http.post(this.url, fruit)
+  }
 
-  // getPrueba(){
-  //   return 'Hola mundo';
-  // }
 }

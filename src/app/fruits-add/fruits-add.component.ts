@@ -24,6 +24,8 @@ export class FruitsAddComponent implements OnInit {
   // fName = '';
   // fPrice ;
   public fruit: Fruit;
+
+  public petFruta: Fruit;
   public petFrutas;
 
   constructor(private _peticionesService: PeticionService) {
@@ -35,53 +37,52 @@ export class FruitsAddComponent implements OnInit {
     // console.log(this._peticionesService.getPrueba());
     console.log(this.fruits);
     console.log(this.petFrutas);
-    this._peticionesService.getFrutas().subscribe(
+    this._peticionesService.getFruits().subscribe(
       result => {
         this.petFrutas = result;
         console.log(result);
       },
       error => {
         var errorMessage = <any>error;
-        console.log(errorMessage)
+        console.log(errorMessage);
       }
     );
 
   }
 
   onToggleAddUpdate(){
-    this.fruits.push(this.fruit)
-    // this._peticionesService.createFruit(this.fruit)
-    //   .subscribe(
-    //   result => {
-    //     this.petFrutas = result;
-    //     console.log(result);
-    //   },
-    //   error => {
-    //     var errorMessage = <any>error;
-    //     console.log(errorMessage)
-    //   }
-    // );;
+    this.fruits.push(this.fruit);
     this.fruit = new Fruit("","");
   }
+
 
   onRemoveFruit(id: number){
     const pos = id;
     this.fruits.splice(pos, 1);
-    // this._peticionesService.deleteFruta(this.petFrutas)
   }
+
 
   onRemoveFruitDB(index: number, id: number){
     console.log("borrado con id "+id);
-    this._peticionesService.deleteFruta(id);
-    this.petFrutas.splice(index, 1)
-    console.log(this.petFrutas)
+    this._peticionesService.deleteFruit(id);
+    this.petFrutas.splice(index, 1);
+    console.log(this.petFrutas);
   }
+
+
+  onCreateFruitDB(){
+    console.log("fruta creada+ "+this.petFruta);
+    this._peticionesService.createFruit(this.petFruta);
+    this.petFrutas.push(this.petFruta);
+    this.petFrutas = new Fruit("","");
+  }
+
 
   existFruit(name: string){
     var index = this.fruits.findIndex(x => x.name == this.fruit.name);
     console.log(index);
     if (this.fruit.name == '' || this.fruit.pricePerKg == ''){
-      console.log("Empty field")
+      console.log("Empty field");
       alert("No name or price!")
     } else if (index == -1 && this.fruit.name == name){
       console.log("Added");
@@ -93,7 +94,6 @@ export class FruitsAddComponent implements OnInit {
     }
   }
 
-  onSubmit(){
-    console.log(this.fruits);
-  }
+
+
 }
