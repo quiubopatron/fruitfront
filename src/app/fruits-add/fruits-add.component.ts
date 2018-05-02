@@ -25,6 +25,7 @@ export class FruitsAddComponent implements OnInit {
   // fPrice ;
   public fruit: Fruit;
 
+  public selectedFruit: Fruit;
   public petFruta: Fruit;
   public petFrutas: Fruit [];
 
@@ -59,8 +60,10 @@ export class FruitsAddComponent implements OnInit {
 
   onRemoveFruitDB(index: number, id: number){
     console.log("borrado con id "+id);
-    this._peticionesService.deleteFruit(id);
-    this.petFrutas.splice(index, 1);
+    this._peticionesService.deleteFruit(id)
+      .then( ()=> {
+        this.petFrutas.splice(index, 1);
+      });
     console.log(this.petFrutas);
   }
 

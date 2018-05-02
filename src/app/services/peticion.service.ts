@@ -20,9 +20,12 @@ export class PeticionService {
       .catch(this.handleError);
   }
 
-  deleteFruit(i: number) {
+  deleteFruit(i: number): Promise<void> {
     console.log("DELETE");
-    return this._http.delete(this.url + "/" + i);
+    return this._http.delete(this.url + "/" + i)
+      .toPromise()
+      .then(() => null)
+      .catch(this.handleError);
   }
 
   createFruit(fruit: Fruit) {
