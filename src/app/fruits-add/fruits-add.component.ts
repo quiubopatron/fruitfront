@@ -26,7 +26,7 @@ export class FruitsAddComponent implements OnInit {
   public fruit: Fruit;
 
   public petFruta: Fruit;
-  public petFrutas;
+  public petFrutas: Fruit [];
 
   constructor(private _peticionesService: PeticionService) {
 
@@ -35,19 +35,14 @@ export class FruitsAddComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this._peticionesService.getPrueba());
-    console.log(this.fruits);
+    //console.log(this.fruits);
+    this.getFruits();
     console.log(this.petFrutas);
-    this._peticionesService.getFruits().subscribe(
-      result => {
-        this.petFrutas = result;
-        console.log(result);
-      },
-      error => {
-        var errorMessage = <any>error;
-        console.log(errorMessage);
-      }
-    );
+  }
 
+  getFruits(): void {
+    this._peticionesService.getFruits()
+      .then(fruits => this.petFrutas = fruits);
   }
 
   onToggleAddUpdate(){
@@ -74,7 +69,7 @@ export class FruitsAddComponent implements OnInit {
     console.log("fruta creada+ "+this.petFruta);
     this._peticionesService.createFruit(this.petFruta);
     this.petFrutas.push(this.petFruta);
-    this.petFrutas = new Fruit("","");
+    this.petFruta = new Fruit("","");
   }
 
 
