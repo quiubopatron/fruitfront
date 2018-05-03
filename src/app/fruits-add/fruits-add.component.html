@@ -84,14 +84,16 @@
     <h4 defColOnEvent>Add Fruit</h4>
     <p>
       <label> <b> Name </b> </label>
-      <input type = "text"
+      <input #name type = "text" name="name"
+             [(ngModel)]="petFruta.name"
              class="form-control"
              pattern="[a-zA-Z]+"
              required/>
     </p>
     <p>
       <label> <b> Price per Kg </b> </label>
-      <input type = "number"
+      <input #pricePerKg type = "number" name="pricePerKg"
+             [(ngModel)]="petFruta.pricePerKg"
              class="form-control"
              pattern="[0-9]+"
              required>

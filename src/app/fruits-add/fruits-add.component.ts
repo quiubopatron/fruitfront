@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgModel } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {Fruit} from "./fruit-add.model";
 import {PeticionService} from "../services/peticion.service";
-import { HttpModule } from '@angular/http';
-
 
 
 @Component({
@@ -33,6 +29,7 @@ export class FruitsAddComponent implements OnInit {
   constructor(private _peticionesService: PeticionService) {
 
     this.fruit = new Fruit("", null);
+    this.petFruta = new Fruit("" , null);
   }
 
    ngOnInit() {
@@ -78,14 +75,16 @@ export class FruitsAddComponent implements OnInit {
 
 
   onCreateFruitDB(){
-    console.log("fruta creada+ "+this.petFruta);
-
+    console.log("el nombre de la fruta es= "+ this.petFruta.name);
+    console.log("el peso de la fruta es= "+this.petFruta.pricePerKg);
     this._peticionesService.createFruit(this.petFruta)
       .then(fruta => {
         this.petFrutas.push(this.petFruta);
-        console.log(this.petFrutas);
+        console.log("fruta creada+ "+this.petFruta);
         this.petFruta = new Fruit("",null);
       });
+    console.log(this.petFrutas);
+
   }
 
 

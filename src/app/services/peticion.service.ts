@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 import {Fruit} from "../fruits-add/fruit-add.model";
 import {HttpClient} from "@angular/common/http";
+import {RequestOptions} from "@angular/http";
 
 @Injectable()
 export class PeticionService {
@@ -29,12 +30,13 @@ export class PeticionService {
   }
 
   createFruit(fruit: Fruit): Promise<Fruit>{
-    console.log("FRUTA a crear: " + JSON.stringify(fruit));
     return this._http.post(this.url, JSON.stringify(fruit))
       .toPromise()
       .then(response => response as Fruit)
       .catch(this.handleError);
   }
+
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
