@@ -79,12 +79,11 @@ export class FruitsAddComponent implements OnInit {
     console.log("el peso de la fruta es= "+this.petFruta.pricePerKg);
     this._peticionesService.createFruit(this.petFruta)
       .then(fruta => {
-        this.petFrutas.push(this.petFruta);
-        console.log("fruta creada+ "+this.petFruta);
-        this.petFruta = new Fruit("",null);
-      });
-    console.log(this.petFrutas);
-
+         this.petFrutas.push(this.petFruta);
+         console.log("fruta creada+ "+this.petFruta);
+         this.petFruta = new Fruit("",null);
+        console.log(this.petFrutas);
+       });
   }
 
 
@@ -105,18 +104,18 @@ export class FruitsAddComponent implements OnInit {
   }
 
 
-  pruebaPostFruit(prueba: Fruit){
-    prueba.idFruit=1;
-    prueba.name="aaa";
-    prueba.description= null;
-    prueba.pricePerKg=99;
-    prueba.dateCreated=null;
-    console.log("prueba= "+prueba);
-    this._peticionesService.createFruit(prueba)
-      .then(fruta => {
-        this.petFrutas.push(prueba);
-        prueba = new Fruit("",null);
-      });
-  }
+  // pruebaPostFruit(prueba: Fruit){
+  //   prueba.idFruit=1;
+  //   prueba.name="aaa";
+  //   prueba.description= null;
+  //   prueba.pricePerKg=99;
+  //   prueba.dateCreated=null;
+  //   console.log("prueba= "+prueba);
+  //   this._peticionesService.createFruit(prueba)
+  //     .then(fruta => {
+  //       this.petFrutas.push(prueba);
+  //       prueba = new Fruit("",null);
+  //     });
+  // }
 
 }

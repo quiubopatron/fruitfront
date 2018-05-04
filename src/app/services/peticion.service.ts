@@ -2,14 +2,14 @@ import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 import {Fruit} from "../fruits-add/fruit-add.model";
-import {HttpClient} from "@angular/common/http";
-import {RequestOptions} from "@angular/http";
+import {HttpClient, HttpHeaders, HttpHeaderResponse} from "@angular/common/http";
 
 @Injectable()
 export class PeticionService {
   // public url: string;
   public url = "http://localhost:8081/rookie/fruits";
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
+
 
   constructor(private _http: HttpClient) {
   }
@@ -30,13 +30,12 @@ export class PeticionService {
   }
 
   createFruit(fruit: Fruit): Promise<Fruit>{
-    return this._http.post(this.url, JSON.stringify(fruit))
+    console.log("CREATE");
+    return this._http.post(this.url, JSON.stringify(fruit), {headers: this.headers})
       .toPromise()
-      .then(response => response as Fruit)
+      .then(r => console.log("success "+r))
       .catch(this.handleError);
   }
-
-
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
