@@ -33,12 +33,7 @@ export class FruitsAddComponent implements OnInit {
   }
 
    ngOnInit() {
-    // console.log(this._peticionesService.getPrueba());
-    //console.log(this.fruits);
      this.getFruits();
-    //  console.log(this.getFruits());
-
-    // this.pruebaPostFruit(this.test);
    }
 
 
@@ -46,7 +41,8 @@ export class FruitsAddComponent implements OnInit {
     this._peticionesService.getFruits()
        .then(res => {
          this.petFrutas = res;
-         console.log("array de frutas--> "+this.petFrutas);
+         console.log("array inicial "+res);
+         //por qué no me enseña el array al iniciar???
        });
   }
 
@@ -82,6 +78,7 @@ export class FruitsAddComponent implements OnInit {
          this.petFrutas.push(this.petFruta);
          console.log("fruta creada+ "+this.petFruta);
          this.petFruta = new Fruit("",null);
+         this.getFruits();
         console.log(this.petFrutas);
        });
   }
