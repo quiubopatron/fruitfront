@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import {changeColor} from "./fruits-add/fruits-add.directive";
 import {PeticionService} from "./services/peticion.service";
+import { FruitsUpdateComponent } from './fruits-update/fruits-update.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {routing, appRoutingProviders} from "./app-routing";
 
 @NgModule({
   declarations: [
@@ -16,14 +19,18 @@ import {PeticionService} from "./services/peticion.service";
     FruitsAddComponent,
     HeaderComponent,
     changeColor,
+    FruitsUpdateComponent,
+    PageNotFoundComponent,
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    routing
   ],
-  providers: [PeticionService],
+  providers: [PeticionService,
+    appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit{

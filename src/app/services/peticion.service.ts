@@ -2,11 +2,10 @@ import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 import {Fruit} from "../fruits-add/fruit-add.model";
-import {HttpClient, HttpHeaders, HttpHeaderResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class PeticionService {
-  // public url: string;
   public url = "http://localhost:8081/rookie/fruits";
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -33,7 +32,7 @@ export class PeticionService {
     console.log("CREATE");
     return this._http.post(this.url, JSON.stringify(fruit), {headers: this.headers})
       .toPromise()
-      .then(r => console.log("success "+r))
+      .then(response => response as Fruit)
       .catch(this.handleError);
   }
 

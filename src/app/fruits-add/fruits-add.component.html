@@ -65,6 +65,7 @@
 
 
 <!--BASE DE DATOS-->
+<base href="/">
 <h4>Data base Fruits</h4>
 <div class="row">
   <div class="col-xs-10">
@@ -74,6 +75,10 @@
         {{petFruta.name}} ({{petFruta.pricePerKg}})
         <button (click)="onRemoveFruitDB(j,petFruta.idFruit)" style="float: right">
           Delete
+        </button>
+        <button routerLink="update-fruit/:id" routerLinkActive="active"
+          style="float: right">
+          Update
         </button>
       </a>
     </ul>

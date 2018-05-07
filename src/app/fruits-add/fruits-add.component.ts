@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Fruit} from "./fruit-add.model";
 import {PeticionService} from "../services/peticion.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -17,11 +18,8 @@ export class FruitsAddComponent implements OnInit {
     new Fruit('Banana', 4),
     new Fruit('Manzana', 5),
   ];
-  // fName = '';
-  // fPrice ;
   public fruit: Fruit;
 
-  public test: Fruit;
   public petFruta: Fruit;
   public petFrutas: Fruit [];
 
@@ -41,8 +39,7 @@ export class FruitsAddComponent implements OnInit {
     this._peticionesService.getFruits()
        .then(res => {
          this.petFrutas = res;
-         console.log("array inicial "+res);
-         //por qué no me enseña el array al iniciar???
+         console.log("array inicial "+this.petFrutas);
        });
   }
 
@@ -64,7 +61,7 @@ export class FruitsAddComponent implements OnInit {
     this._peticionesService.deleteFruit(id)
       .then( ()=> {
         this.petFrutas.splice(index, 1);
-        console.log(this.petFrutas);
+        console.table(this.petFrutas);
       });
 
   }
@@ -75,11 +72,10 @@ export class FruitsAddComponent implements OnInit {
     console.log("el peso de la fruta es= "+this.petFruta.pricePerKg);
     this._peticionesService.createFruit(this.petFruta)
       .then(fruta => {
-         this.petFrutas.push(this.petFruta);
-         console.log("fruta creada+ "+this.petFruta);
+        console.log(fruta);
+         this.petFrutas.push(fruta);
          this.petFruta = new Fruit("",null);
-         this.getFruits();
-        console.log(this.petFrutas);
+        console.table(this.petFrutas);
        });
   }
 
@@ -99,20 +95,5 @@ export class FruitsAddComponent implements OnInit {
       this.onToggleAddUpdate();
     }
   }
-
-
-  // pruebaPostFruit(prueba: Fruit){
-  //   prueba.idFruit=1;
-  //   prueba.name="aaa";
-  //   prueba.description= null;
-  //   prueba.pricePerKg=99;
-  //   prueba.dateCreated=null;
-  //   console.log("prueba= "+prueba);
-  //   this._peticionesService.createFruit(prueba)
-  //     .then(fruta => {
-  //       this.petFrutas.push(prueba);
-  //       prueba = new Fruit("",null);
-  //     });
-  // }
 
 }
