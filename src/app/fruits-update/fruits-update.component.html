@@ -1,3 +1,32 @@
-<p>
-  fruits-update works!
-</p>
+<h4 defColOnEvent>Update fruit {{param}}</h4>
+
+<form>
+  <div class="container">
+
+    <p>
+      <label> <b> Name </b> </label>
+      <input #name type = "text" name="name"
+             [(ngModel)]="fruitToUpdate"
+             class="form-control"
+             pattern="[a-zA-Z]+"
+             required/>
+    </p>
+    <p>
+      <label> <b> Price per Kg </b> </label>
+      <input #pricePerKg type = "number" name="pricePerKg"
+             [ngModel]="fruitToUpdate"
+             class="form-control"
+             pattern="[0-9]+"
+             required>
+    </p>
+
+    <p>
+      <button [routerLink]="['/home']" routerLinkActive="active"
+        class="btn btn-primary"
+              type = "submit"
+              (click)="onUpdateFruit()">
+        Update
+      </button>
+    </p>
+  </div>
+</form>

@@ -76,17 +76,21 @@
         <button (click)="onRemoveFruitDB(j,petFruta.idFruit)" style="float: right">
           Delete
         </button>
-        <button routerLink="update-fruit/:id" routerLinkActive="active"
-          style="float: right">
+        <button style="float: right"
+                (click)="onUpdateFruitDB(petFruta.idFruit)">
           Update
         </button>
+        <!--<button [routerLink]="['/update-fruit', petFruta.idFruit]" routerLinkActive="active"-->
+          <!--style="float: right">-->
+          <!--Update-->
+        <!--</button>-->
       </a>
     </ul>
   </div>
 </div>
 <form>
   <div class="container">
-    <h4 defColOnEvent>Add Fruit</h4>
+    <h4 defColOnEvent>Add or Update Fruit</h4>
     <p>
       <label> <b> Name </b> </label>
       <input #name type = "text" name="name"
@@ -113,3 +117,8 @@
     </p>
   </div>
 </form>
+<div class="alert alert-warning" role="alert">
+  <strong>Warning!</strong>
+  <br>Las frutas se actualizarán introduciendo el mismo nombre de fruta y diferente precio pulsado el update de su celda.
+  <br>Si introducimos una fruta que no existe y pulsamos add, se agregará a la lista.
+</div>

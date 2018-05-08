@@ -20,9 +20,9 @@ export class PeticionService {
       .catch(this.handleError);
   }
 
-  deleteFruit(i: number): Promise<void> {
+  deleteFruit(id: number): Promise<void> {
     console.log("DELETE");
-    return this._http.delete(this.url + "/" + i)
+    return this._http.delete(this.url + "/" + id)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
@@ -33,6 +33,14 @@ export class PeticionService {
     return this._http.post(this.url, JSON.stringify(fruit), {headers: this.headers})
       .toPromise()
       .then(response => response as Fruit)
+      .catch(this.handleError);
+  }
+
+  updateFruit(fruit: Fruit, id: number): Promise<Fruit>{
+    console.log("UPDATE");
+    return this._http.put(this.url + "/"+id , JSON.stringify(fruit), {headers: this.headers})
+      .toPromise()
+      .then(() => fruit)
       .catch(this.handleError);
   }
 

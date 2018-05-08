@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Fruit} from "./fruit-add.model";
 import {PeticionService} from "../services/peticion.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 
 
 @Component({
@@ -22,7 +22,6 @@ export class FruitsAddComponent implements OnInit {
 
   public petFruta: Fruit;
   public petFrutas: Fruit [];
-
 
   constructor(private _peticionesService: PeticionService) {
 
@@ -63,20 +62,78 @@ export class FruitsAddComponent implements OnInit {
         this.petFrutas.splice(index, 1);
         console.table(this.petFrutas);
       });
-
   }
 
 
+  // onCreateFruitOrUpdateDB(id: number){
+  //   console.log("el nombre de la fruta es= "+ this.petFruta.name);
+  //   console.log("el peso de la fruta es= "+this.petFruta.pricePerKg);
+  //
+  //   var index = this.petFrutas.findIndex(x => x.name == this.petFruta.name);
+  //   console.log("indice " + index);
+  //   console.log("con id= "+id);
+  //   console.log(this.petFruta.name);
+  //   console.log(this.petFruta.idFruit);
+  //
+  //   if(this.petFruta.name =='' || this.petFruta.pricePerKg == null){
+  //     alert("no name or price");
+  //   }else if (index == -1 && this.petFruta.name != ''){
+  //     console.log("add");
+  //     this._peticionesService.createFruit(this.petFruta)
+  //       .then(fruta => {
+  //         console.log(fruta);
+  //         this.petFrutas.push(fruta);
+  //         this.petFruta = new Fruit("",null);
+  //         console.table(this.petFrutas);
+  //       });
+  //   }else if (index != -1 && this.petFruta.name!=''){
+  //     console.log("update");
+  //     this._peticionesService.updateFruit(this.petFruta, id)
+  //       .then(fruta => {
+  //         console.log(fruta);
+  //         this.petFruta = new Fruit("",null);
+  //         console.table(this.petFrutas);
+  //       });
+  //     this.getFruits();
+  //   }
+  // }
+
   onCreateFruitDB(){
-    console.log("el nombre de la fruta es= "+ this.petFruta.name);
-    console.log("el peso de la fruta es= "+this.petFruta.pricePerKg);
-    this._peticionesService.createFruit(this.petFruta)
-      .then(fruta => {
-        console.log(fruta);
-         this.petFrutas.push(fruta);
-         this.petFruta = new Fruit("",null);
-        console.table(this.petFrutas);
-       });
+    var index = this.petFrutas.findIndex(x => x.name == this.petFruta.name);
+
+    if(this.petFruta.name == '' || this.petFruta.pricePerKg == null){
+      alert("no name or price");
+    }else if(index == -1 && this.petFruta.name!= ''){
+      console.log("add");
+      this._peticionesService.createFruit(this.petFruta)
+        .then(fruta => {
+          console.log(fruta);
+          this.petFrutas.push(fruta);
+          this.petFruta = new Fruit("",null);
+          console.table(this.petFrutas);
+        });
+    }else if(index!= -1 && this.petFruta.name!= ''){
+      alert("la fruta ya está introducida, si quieres actualizar su precio pulsa update!")
+    }
+  }
+
+  onUpdateFruitDB(id: number){
+    var index = this.petFrutas.findIndex(x => x.name == this.petFruta.name);
+
+    if(this.petFruta.name =='' || this.petFruta.pricePerKg == null){
+      alert("no name or price");
+    }else if (index == -1 && this.petFruta.name != ''){
+      alert("el nombre de la fruta no es correcto!");
+    }else if (index != -1 && this.petFruta.name!=''){
+      console.log("update");
+      this._peticionesService.updateFruit(this.petFruta, id)
+        .then(fruta => {
+          console.log(fruta);
+          this.petFruta = new Fruit("",null);
+          console.table(this.petFrutas);
+          this.getFruits();
+        });
+    }
   }
 
 
