@@ -117,21 +117,21 @@ export class FruitsAddComponent implements OnInit {
     }
   }
 
-  onUpdateFruitDB(id: number){
+  onUpdateFruitDB(num: number, id: number){
     var index = this.petFrutas.findIndex(x => x.name == this.petFruta.name);
 
     if(this.petFruta.name =='' || this.petFruta.pricePerKg == null){
       alert("no name or price");
     }else if (index == -1 && this.petFruta.name != ''){
       alert("el nombre de la fruta no es correcto!");
-    }else if (index != -1 && this.petFruta.name!=''){
+    }else if (index != -1 && this.petFruta.name!='' && num == index){
       console.log("update");
       this._peticionesService.updateFruit(this.petFruta, id)
         .then(fruta => {
           console.log(fruta);
           this.petFruta = new Fruit("",null);
-          console.table(this.petFrutas);
           this.getFruits();
+          console.table(this.petFrutas);
         });
     }
   }
