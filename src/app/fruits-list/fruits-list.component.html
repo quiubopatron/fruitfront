@@ -1,0 +1,20 @@
+
+<!--BASE DE DATOS-->
+<base href="/">
+<h4>Data base Fruits</h4>
+<div class="row">
+  <div class="col-xs-10">
+    <ul class="list-group">
+      <!--<a routerLink="/edit-fruit/:id" routerLinkActive="active" class="list-group-item"-->
+      <a a routerLink="/edit-fruit/:id" routerLinkActive="active" class="list-group-item"
+         (click)="onSelected()"
+         *ngFor = "let petFruta of petFrutas; let j = index">
+        {{petFruta.name}} ({{petFruta.pricePerKg}})
+        <button (click)="onRemoveFruitDB(j,petFruta.idFruit)" style="float: right">
+          Delete
+        </button>
+      </a>
+    </ul>
+  </div>
+</div>
+

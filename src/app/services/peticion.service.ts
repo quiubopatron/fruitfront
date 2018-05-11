@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
-import {Fruit} from "../fruits-add/fruit-add.model";
+import {Fruit} from "../fruits-list/fruits-list.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()

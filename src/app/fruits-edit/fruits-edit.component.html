@@ -1,31 +1,34 @@
-<h4 defColOnEvent>Update fruit {{param}}</h4>
-
 <form>
   <div class="container">
-
+    <h4 defColOnEvent>Add or Update Fruit</h4>
     <p>
       <label> <b> Name </b> </label>
       <input #name type = "text" name="name"
-             [(ngModel)]="fruitToUpdate"
+             [(ngModel)]="newFruit.name"
              class="form-control"
              pattern="[a-zA-Z]+"
              required/>
     </p>
     <p>
+      <label> <b> Description </b> </label>
+      <input #name type = "text" name="description"
+             [(ngModel)]="newFruit.description"
+             class="form-control"/>
+    </p>
+    <p>
       <label> <b> Price per Kg </b> </label>
       <input #pricePerKg type = "number" name="pricePerKg"
-             [ngModel]="fruitToUpdate"
+             [(ngModel)]="newFruit.pricePerKg"
              class="form-control"
              pattern="[0-9]+"
              required>
     </p>
 
     <p>
-      <button [routerLink]="['/home']" routerLinkActive="active"
-        class="btn btn-primary"
+      <button class="btn btn-primary"
               type = "submit"
-              (click)="onUpdateFruit()">
-        Update
+              (click)="onCreateFruitDB()">
+        Submit
       </button>
     </p>
   </div>
