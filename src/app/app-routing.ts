@@ -6,10 +6,10 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {FruitList} from "./fruits-list/fruits-list.component";
 
 const appRoutes: Routes = [
+  {path: '', redirectTo: '/list-fruit', pathMatch: 'full'},
   {path: 'list-fruit', component: FruitList},
   {path: 'edit-fruit', component: FruitEdit, children: [
-      {path: ':id', component: FruitEdit}
-    ]},
+      {path: ':id', component: FruitEdit}]},
   {path: '**', component: PageNotFoundComponent}
 ];
 

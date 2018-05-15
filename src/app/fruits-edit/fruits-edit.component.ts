@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Fruit} from "../fruits-list/fruits-list.model";
 import {PeticionService} from "../services/peticion.service";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-fruits-edit',
@@ -9,35 +10,76 @@ import {PeticionService} from "../services/peticion.service";
   styleUrls: ['./fruits-edit.component.css']
 })
 export class FruitEdit implements OnInit {
-  public param;
-  @Input() petFruta: Fruit;
-  @Input() petFrutas: Fruit[];
+  frutas: Fruit[];
   newFruit : Fruit;
 
-  constructor(private _peticionesService: PeticionService, private _route: ActivatedRoute, private _router: Router) { }
-
-  ngOnInit() {
-    this._route.params.forEach((params: Params) => {
-      this.param = params['id'];
-      console.log("parametros -> "+params);
-    });
+  constructor(private _peticionesService: PeticionService, private acivatedRoute: ActivatedRoute) {
   }
 
 
-  onCreateFruitDB() {
-    var index = this.petFrutas.findIndex(x => x.name == this.petFruta.name);
+  ngOnInit () {
+    this._peticionesService.getFruits()
+      .then(fruits => this.frutas = fruits);
+
+    this.newFruit = new Fruit("", null);
+
+    this.acivatedRoute.queryParams.subscribe(params => {
+      let id = +params['id'];
+      this._peticionesService.getFruit(id)
+        .then(fruit => {
+          // this.newFruit.idFruit = fruit.idFruit;
+          this.newFruit.name = fruit.name;
+          this.newFruit.description = fruit.description;
+          this.newFruit.pricePerKg = fruit.pricePerKg;
+          this.newFruit.dateCreated = fruit.dateCreated;
+        });
+      console.log("id -> "+id);
+        });
+  }
+
+  getFruits(): void {
+    this._peticionesService.getFruits()
+      .then(res => {
+        this.frutas = res;
+        console.log("array inicial "+this.frutas);
+      });
+  }
+  onCreateOrUpdateFruitDB() {
+    var index = this.frutas.findIndex(x => x.name == this.newFruit.name);
+    // var index = this.frutas.indexOf(this.newFruit);
 
     if (this.newFruit.name == '' || this.newFruit.pricePerKg == null) {
-      alert("no name or price");
-    } else {
-      console.log("add");
-      this._peticionesService.createFruit(this.petFruta)
-        .then(fruta => {
-          console.log(fruta);
-          this.petFrutas.push(fruta);
-          this.newFruit = new Fruit("", null);
-          console.table(this.petFrutas);
-        });
+          alert("no name or price");
+        }else if (index == -1 && this.newFruit.name != ''){
+          console.log("add");
+          this._peticionesService.createFruit(this.newFruit)
+            .then(fruta => {
+              console.log(fruta);
+              // this.frutas.push(fruta);
+              // this.newFruit = new Fruit("",null);
+              console.table(this.frutas);
+            });
+        }else if (index != -1 && this.newFruit.name!=''){
+          console.log("update");
+          this.acivatedRoute.queryParams.subscribe(params => {
+            let id = +params['id'];
+            this._peticionesService.updateFruit(this.newFruit, id)
+              .then(fruta => {
+                console.log("id para actualizar = "+id);
+                console.log(fruta);
+                // this.newFruit = new Fruit("",null);
+                console.table(this.frutas);
+              });
+          });
+          this.getFruits();
     }
-  }
+        }
+
 }
+// this._peticionesService.createFruit(this.newFruit)
+//   .then(fruta => {
+//     console.log(fruta);
+//     this.frutas.push(fruta);
+//     this.newFruit = new Fruit("", null);
+//     console.table(this.frutas);
+//   });

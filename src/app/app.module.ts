@@ -30,7 +30,7 @@ import {routing, appRoutingProviders} from "./app-routing";
     routing
   ],
   providers: [PeticionService,
-    appRoutingProviders],
+    appRoutingProviders, Location],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit{

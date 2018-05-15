@@ -20,6 +20,11 @@ export class PeticionService {
       .catch(this.handleError);
   }
 
+  getFruit(id: number): Promise<Fruit>{
+    return this.getFruits()
+      .then(fruits => fruits.find(fruit => fruit.idFruit === id));
+  }
+
   deleteFruit(id: number): Promise<void> {
     console.log("DELETE");
     return this._http.delete(this.url + "/" + id)

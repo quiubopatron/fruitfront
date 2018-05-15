@@ -1,5 +1,5 @@
 <form>
-  <div class="container">
+  <div *ngIf="newFruit" class="container">
     <h4 defColOnEvent>Add or Update Fruit</h4>
     <p>
       <label> <b> Name </b> </label>
@@ -25,11 +25,20 @@
     </p>
 
     <p>
-      <button class="btn btn-primary"
-              type = "submit"
-              (click)="onCreateFruitDB()">
+      <button
+
+              [disabled]=!newFruit
+              class="btn btn-primary"
+              type = "button"
+              (click)="onCreateOrUpdateFruitDB()">
         Submit
       </button>
+      <!--<button [disabled]=newFruit-->
+              <!--class="btn btn-primary"-->
+              <!--type = "button"-->
+              <!--(click)="onCreateFruitDB()">-->
+        <!--Update-->
+      <!--</button>-->
     </p>
   </div>
 </form>
