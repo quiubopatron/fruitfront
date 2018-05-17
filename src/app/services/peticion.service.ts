@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
-import {Fruit} from "../fruits-list/fruits-list.model";
+import {Fruit} from "../model/fruit";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
@@ -21,8 +21,10 @@ export class PeticionService {
   }
 
   getFruit(id: number): Promise<Fruit>{
-    return this.getFruits()
-      .then(fruits => fruits.find(fruit => fruit.idFruit === id));
+    return this._http.get(this.url + "/" + id)
+      .toPromise()
+      .then(response => response as Fruit)
+      .catch(this.handleError);
   }
 
   deleteFruit(id: number): Promise<void> {
@@ -41,12 +43,16 @@ export class PeticionService {
       .catch(this.handleError);
   }
 
-  updateFruit(fruit: Fruit, id: number): Promise<Fruit>{
+  updateFruit(fruit: Fruit): Promise<Fruit>{
     console.log("UPDATE");
-    return this._http.put(this.url + "/"+id , JSON.stringify(fruit), {headers: this.headers})
+    return this._http.put(this.url + "/" + fruit.idFruit , JSON.stringify(fruit), {headers: this.headers})
       .toPromise()
       .then(() => fruit)
       .catch(this.handleError);
+  }
+
+  refresh() : void {
+    window.location.reload();
   }
 
   private handleError(error: any): Promise<any> {

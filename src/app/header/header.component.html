@@ -5,8 +5,8 @@
       <a routerLink="/list-fruit" routerLinkActive="active" class="navbar-brand"> Fruit List
         <span class="glyphicon glyphicon-apple"></span>
       </a>
-      <li><a routerLink="/list-fruit" routerLinkActive="active"> Listado de frutas </a></li>
-      <li><a routerLink="/edit-fruit" routerLinkActive="active"> Agregar fruta </a></li>
+      <li><a (click)="onSelect()" routerLink="/list-fruit" routerLinkActive="active"> Listado de frutas </a></li>
+      <li><a (click)="onSelect()" routerLink="/edit-fruit" routerLinkActive="active"> Agregar fruta </a></li>
     </div>
   </div>
 </nav>

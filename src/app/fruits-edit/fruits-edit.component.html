@@ -1,10 +1,11 @@
-<form>
-  <div *ngIf="newFruit" class="container">
+<form >
+  <div *ngIf="fruit" class="container">
     <h4 defColOnEvent>Add or Update Fruit</h4>
     <p>
+      <input name="idFruit" hidden [ngModel]="fruit.idFruit"/>
       <label> <b> Name </b> </label>
       <input #name type = "text" name="name"
-             [(ngModel)]="newFruit.name"
+             [(ngModel)]="fruit.name"
              class="form-control"
              pattern="[a-zA-Z]+"
              required/>
@@ -12,13 +13,13 @@
     <p>
       <label> <b> Description </b> </label>
       <input #name type = "text" name="description"
-             [(ngModel)]="newFruit.description"
+             [(ngModel)]="fruit.description"
              class="form-control"/>
     </p>
     <p>
       <label> <b> Price per Kg </b> </label>
       <input #pricePerKg type = "number" name="pricePerKg"
-             [(ngModel)]="newFruit.pricePerKg"
+             [(ngModel)]="fruit.pricePerKg"
              class="form-control"
              pattern="[0-9]+"
              required>
@@ -27,18 +28,12 @@
     <p>
       <button
 
-              [disabled]=!newFruit
+              [disabled]="!fruit"
               class="btn btn-primary"
               type = "button"
               (click)="onCreateOrUpdateFruitDB()">
         Submit
       </button>
-      <!--<button [disabled]=newFruit-->
-              <!--class="btn btn-primary"-->
-              <!--type = "button"-->
-              <!--(click)="onCreateFruitDB()">-->
-        <!--Update-->
-      <!--</button>-->
     </p>
   </div>
 </form>

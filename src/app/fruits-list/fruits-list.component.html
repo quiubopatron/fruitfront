@@ -5,16 +5,11 @@
 <div class="row">
   <div class="col-xs-10">
     <ul class="list-group">
-      <!--<a routerLink="/edit-fruit/:id" routerLinkActive="active" class="list-group-item"-->
-      <a *ngFor = "let fruta of frutas; let j = index"
-         (click)="onSelect(fruta)"
-         class="list-group-item"
-         >
-        {{fruta.name}} ({{fruta.pricePerKg}})
-        <button (click)="onRemoveFruitDB(j,fruta.idFruit)" style="float: right">
-          Delete
-        </button>
-      </a>
+      <li *ngFor = "let fruta of frutas; let j = index" class="list-group-item">
+        <a routerLink="/edit-fruit/{{fruta.idFruit}}" routerLinkActive="active"
+          style="cursor: pointer" (click)="onSelect(fruta)">{{fruta.name}} ({{fruta.pricePerKg}})</a>
+        <button (click)="onRemoveFruitDB(j,fruta.idFruit)"  style="float: right">Delete</button>
+      </li>
     </ul>
   </div>
 </div>
