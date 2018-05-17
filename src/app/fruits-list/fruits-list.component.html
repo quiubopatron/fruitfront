@@ -5,12 +5,25 @@
 <div class="row">
   <div class="col-xs-10">
     <ul class="list-group">
-      <li *ngFor = "let fruta of frutas; let j = index" class="list-group-item">
-        <a routerLink="/edit-fruit/{{fruta.idFruit}}" routerLinkActive="active"
-          style="cursor: pointer" (click)="onSelect(fruta)">{{fruta.name}} ({{fruta.pricePerKg}})</a>
-        <button (click)="onRemoveFruitDB(j,fruta.idFruit)"  style="float: right">Delete</button>
+      <li *ngFor = "let fruta of frutas; let j = index"
+          class="list-group-item">
+        <a routerLink="/edit-fruit/{{fruta.idFruit}}"
+           routerLinkActive="active"
+           style="cursor: pointer"
+           (click)="onSelect(fruta)">
+           {{fruta.name}} ({{fruta.pricePerKg}})</a>
+        <button (click)="onRemoveFruitDB(j,fruta.idFruit)"
+                style="float: right">
+          Delete
+        </button>
       </li>
     </ul>
   </div>
 </div>
+<br>
+<button class="btn btn-success"
+        type="button"
+        routerLink="/edit-fruit"
+        routerLinkActive="active"> Agregar fruta </button>
+
 

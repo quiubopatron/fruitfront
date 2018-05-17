@@ -7,11 +7,9 @@ import {PeticionService} from "../services/peticion.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private _peticionesService: PeticionService) { }
+  constructor() { }
 
   ngOnInit() {
-
   }
 
   onSelect () {
