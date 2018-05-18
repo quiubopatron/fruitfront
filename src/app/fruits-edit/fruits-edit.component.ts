@@ -13,11 +13,6 @@ export class FruitEdit implements OnInit {
 
   fruit: Fruit;
   createMode: boolean;
-  form = new FormGroup({
-    name: new FormControl(),
-    description: new FormControl(),
-    pricePerKg: new FormControl()
-  });
 
   constructor(private _peticionesService: PeticionService, private acivatedRoute: ActivatedRoute,
               private _router: Router) {
@@ -29,38 +24,35 @@ export class FruitEdit implements OnInit {
 
     this.fruit = new Fruit("", null);
 
-    // this.acivatedRoute.queryParams.subscribe(params => {
-    //   let id = params['id'];
-    //   if (id) {
-    //     this.createMode = false;
-    //     console.log("edito: " + id);
-    //     this._peticionesService.getFruit(id)
-    //       .then(fruit => {
-    //         console.log(fruit);
-    //         this.fruit = fruit;
-    //       });
-    //   } else {
-    //     this.createMode = true;
-    //     this.fruit.idFruit = null;
-    //     this.fruit.name = "";
-    //     this.fruit.description = "";
-    //     this.fruit.pricePerKg = null;
-    //     this.fruit.dateCreated = null;
-    //   }
-    // });
-    if(JSON.parse(localStorage.getItem('fruta'))){
-      this.fruit = JSON.parse(localStorage.getItem('fruta'));
-      this.createMode = false;
-    } else {
-      this.createMode = true;
-      // this.fruit.idFruit = null;
-      // this.fruit.name = "";
-      // this.fruit.description = "";
-      // this.fruit.pricePerKg = null;
-      // this.fruit.dateCreated = null;
-    }
+    this.acivatedRoute.queryParams.subscribe(params => {
+      let id = +params['id'];
+      if (id) {
+        this.createMode = false;
+        console.log("edito: " + id);
+        this._peticionesService.getFruit(id)
+          .then(fruit => {
+            console.log(fruit);
+            this.fruit = fruit;
+            console.log("init ->>>>>>> " + this.fruit.name);
 
-    console.log("init ->>>>>>> " + this.fruit.name);
+          });
+      } else {
+        this.createMode = true;
+        this.fruit.idFruit = null;
+        this.fruit.name = "";
+        this.fruit.description = "";
+        this.fruit.pricePerKg = null;
+        this.fruit.dateCreated = null;
+      }
+
+    });
+    // if(JSON.parse(localStorage.getItem('fruta'))){
+    //   this.fruit = JSON.parse(localStorage.getItem('fruta'));
+    //   this.createMode = false;
+    // } else {
+    //   this.createMode = true;
+    // }
+
 
   }
 

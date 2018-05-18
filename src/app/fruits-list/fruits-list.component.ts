@@ -43,9 +43,9 @@ export class FruitList implements OnInit {
 
   onSelect(fruit: Fruit){
     this.fruitSelected = fruit;
-    // this._router.navigate(['/edit-fruit'], { queryParams: { id: fruit.idFruit } });
+    this._router.navigate(['/edit-fruit'], { queryParams: { id: fruit.idFruit } });
     console.log(fruit.idFruit);
-    localStorage.setItem('fruta', JSON.stringify(this.fruitSelected));
+    // localStorage.setItem('fruta', JSON.stringify(this.fruitSelected));
 
   }
 }
