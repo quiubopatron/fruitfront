@@ -23,6 +23,7 @@ export class FruitList implements OnInit {
      this.getFruits();
    }
 
+
   getFruits(): void {
     this._peticionesService.getFruits()
        .then(res => {
@@ -30,6 +31,7 @@ export class FruitList implements OnInit {
          console.log("array inicial " + this.frutas);
        });
   }
+
 
   onRemoveFruitDB(index: number, id: number){
     console.log("borrado con id "+id);
@@ -40,6 +42,7 @@ export class FruitList implements OnInit {
       });
     this._router.navigate(['/list-fruit']);
   }
+
 
   onSelect(fruit: Fruit){
     this.fruitSelected = fruit;

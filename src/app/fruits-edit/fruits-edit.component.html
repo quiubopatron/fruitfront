@@ -1,4 +1,4 @@
-<form >
+<form #formulario="ngForm">
   <div *ngIf="fruit" class="container">
     <h4 defColOnEvent>Add or Update Fruit</h4>
     <p>
@@ -12,13 +12,15 @@
     </p>
     <p>
       <label> <b> Description </b> </label>
-      <input #name type = "text" name="description"
+      <input #description type = "text"
+             name="description"
              [(ngModel)]="fruit.description"
              class="form-control"/>
     </p>
     <p>
       <label> <b> Price per Kg </b> </label>
-      <input #pricePerKg type = "number" name="pricePerKg"
+      <input #pricePerKg type = "number"
+             name="pricePerKg"
              [(ngModel)]="fruit.pricePerKg"
              class="form-control"
              pattern="[0-9]+"
@@ -26,9 +28,7 @@
     </p>
 
     <p>
-      <button
-
-              [disabled]="!fruit"
+      <button [disabled]="!fruit"
               class="btn btn-primary"
               type = "button"
               (click)="onCreateOrUpdateFruitDB()">
