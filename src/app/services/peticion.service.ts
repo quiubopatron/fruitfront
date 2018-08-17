@@ -1,12 +1,12 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
-import {Fruit} from "../model/fruit";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Fruit} from '../model/fruit';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class PeticionService {
-  public url = "http://localhost:8081/rookie/fruits";
+  public url = 'http://localhost:8081/rookie/fruits';
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
 
@@ -22,8 +22,8 @@ export class PeticionService {
   }
 
 
-  getFruit(id: number): Promise<Fruit>{
-    return this._http.get(this.url + "/" + id)
+  getFruit(id: number): Promise<Fruit> {
+    return this._http.get(this.url + '/' + id)
       .toPromise()
       .then(response => response as Fruit)
       .catch(this.handleError);
@@ -31,8 +31,8 @@ export class PeticionService {
 
 
   deleteFruit(id: number): Promise<void> {
-    console.log("DELETE");
-    return this._http.delete(this.url + "/" + id)
+    console.log('DELETE');
+    return this._http.delete(this.url + '/' + id)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
